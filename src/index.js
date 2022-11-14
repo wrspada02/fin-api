@@ -133,6 +133,14 @@ app.delete('/account', verifyIfExistsCpfAccount, (req, res) => {
     return res.status(200).json(customers);
 });
 
+app.get('/balance', verifyIfExistsCpfAccount, (req, res) => {
+    const { customer } = req;
+
+    const balance = getBalance(customer.statement);
+
+    return res.status(200).json(balance);
+});
+
 app.listen(3333, () => {
     console.log('Listening on port 3333'); 
 }); 
